@@ -3,6 +3,10 @@ package exception;
 import java.io.FileNotFoundException;
 
 public class XmlNotFoundException extends FileNotFoundException{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8391699677934543413L;
 	public XmlNotFoundException(){
 		super();
 	}
