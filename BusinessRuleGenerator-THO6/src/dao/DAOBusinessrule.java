@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.InvalidPropertiesFormatException;
+import java.util.logging.Logger;
 
 import dbutil.*;
 
@@ -23,6 +24,8 @@ public class DAOBusinessrule implements DAO{
 	 * @return returns the resultSet from the database.
 	 */
 	public ResultSet fetch(Object o) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
+		Logger logger = Logger.getLogger("defaultLogger");
+		logger.info("fetching businessrules in DAOBusinessrule");
 		String name = (String)o;
 		DBcon db = new Oraclecon();
 		con = db.getConnection();

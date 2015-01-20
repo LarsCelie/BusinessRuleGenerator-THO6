@@ -25,7 +25,7 @@ public class MySQLcon extends DBcon {
 	
 		String currentUrlString = null;
 			currentUrlString = "jdbc:" + super.dbms + "://" + super.serverName + "/" + super.dbName + "?user=" + super.userName + "&password=" + super.password;
-			System.out.println(currentUrlString);
+			logger.info(currentUrlString);
 			//				  jdbc:oracle:thin:@" + host + ":" + port + ":" + sid, user, password);
 			// String test = jdbc:mysql://localhost/test?user=super.userName&password=super.password
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());

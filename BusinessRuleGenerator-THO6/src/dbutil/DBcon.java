@@ -9,7 +9,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-public abstract class DBcon {
+public abstract class DBcon{
 	protected String dbms;
 	protected String jarFile;
 	protected String dbName;
@@ -41,7 +41,7 @@ public abstract class DBcon {
 		this.serverName = this.prop.getProperty("server_name");
 		this.portNumber = Integer
 				.parseInt(this.prop.getProperty("port_number"));
-		logger.info("Server properties: "+prop);
+		logger.config("Server properties: "+prop);
 		
 	}
 

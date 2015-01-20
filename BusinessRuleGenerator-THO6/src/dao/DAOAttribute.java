@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.InvalidPropertiesFormatException;
+import java.util.logging.Logger;
 
 import dbutil.DBcon;
 import dbutil.Oraclecon;
@@ -31,6 +32,8 @@ public class DAOAttribute implements DAO{
 	@Override
 	public ResultSet fetch(Object o) throws FileNotFoundException,
 			InvalidPropertiesFormatException, IOException, SQLException {
+		Logger logger = Logger.getLogger("defaultLogger");
+		logger.info("fetching attributes in DAOAttribute");
 		String name = (String)o;
 		DBcon db = new Oraclecon();
 		con = db.getConnection();

@@ -11,6 +11,9 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.Properties;
 
+
+import java.util.logging.Logger;
+
 import model.Businessrule;
 import model.Value;
 import exception.XmlNotFoundException;
@@ -36,6 +39,7 @@ public class Generator {
 	 */
 	public String generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
 		String sqlStatement = "";
+		Logger logger = Logger.getLogger("defaultLogger");
 		br = new Businessrule();
 		br.setName(brName);
 		br.loadFromDbIntoObject();
@@ -69,12 +73,12 @@ public class Generator {
 				Object keyO = keys.nextElement();
 				String key = keyO.toString();
 				placeHolderHashmap.put(key, placeHolderProperties.getProperty(key));
-				System.out.println(key + " --- " + placeHolderProperties.getProperty(key));
+				logger.config(key + " --- " + placeHolderProperties.getProperty(key));
 			}
 			
 			this.ruleTemplate = this.templateProperties.getProperty("template");
-			System.out.println(ruleTemplate);
 			sqlStatement = replacePlaceholderWithValues(ruleTemplate);
+			logger.config(sqlStatement);
 		}
 		return sqlStatement;
 	}
