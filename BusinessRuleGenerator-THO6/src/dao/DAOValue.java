@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.InvalidPropertiesFormatException;
-import java.util.logging.Logger;
 
 import dbutil.DBcon;
 import dbutil.Oraclecon;

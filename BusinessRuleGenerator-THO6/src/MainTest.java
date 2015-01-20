@@ -13,8 +13,6 @@ import dbutil.DBcon;
 
 
 public class MainTest {
-private static DBcon dbcon;
-private static Connection c1;
 	public static void main(String[] args) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		Generator g = new Generator();
 		Logger logger = Logger.getLogger("defaultLogger");

@@ -34,14 +34,15 @@ public class Generator {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public void generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
+	public String generate(String brName) throws InvalidPropertiesFormatException, IOException, SQLException {
+		String sqlStatement = "";
 		br = new Businessrule();
 		br.setName(brName);
 		br.loadFromDbIntoObject();
 		String[] nameParts = br.getName().split("_");
 		/*
 		 * BRG_IDD_TRG_RNG_ORA_001
-		 * 0 = BRG = Businessrulegenerator
+		 * 0 = BRG = Businessrule generator
 		 * 1 = IDD = Naam van het veld. eerste 2 letters en laatste letter
 		 * 2 = TRG = Trigger
 		 * 3 = RNG = Rule type
@@ -73,8 +74,9 @@ public class Generator {
 			
 			this.ruleTemplate = this.templateProperties.getProperty("template");
 			System.out.println(ruleTemplate);
-			System.out.println(replacePlaceholderWithValues(ruleTemplate));
+			sqlStatement = replacePlaceholderWithValues(ruleTemplate);
 		}
+		return sqlStatement;
 	}
 
 	/**
@@ -160,11 +162,11 @@ public class Generator {
 		ArrayList<String> result = new ArrayList<String>();
 		ArrayList<Value> valueList = rule.getValues();
 		for(Value v : valueList) {
-			if(v.getDatatype().equals("String")) {
+			if(v.getDatatype().equals("STRING")) {
 				result.add("'"+v.getValue()+"'");
-			} else if(v.getDatatype().equals("Number")) {
+			} else if(v.getDatatype().equals("NUMBER")) {
 				result.add(v.getValue());
-			} else if(v.getDatatype().equals("Date")) {
+			} else if(v.getDatatype().equals("DATE")) {
 				//TODO: do something
 			}
 		}
