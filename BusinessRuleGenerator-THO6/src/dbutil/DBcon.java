@@ -9,7 +9,9 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-public abstract class DBcon{
+import javax.servlet.http.HttpServlet;
+
+public abstract class DBcon extends HttpServlet{
 	protected String dbms;
 	protected String jarFile;
 	protected String dbName;
@@ -28,6 +30,7 @@ public abstract class DBcon{
 			IOException, InvalidPropertiesFormatException {
 		Logger logger = Logger.getLogger("defaultLogger");
 		this.prop = new Properties();
+//		String path = getServletContext().getRealPath("/WEB-INF");
 		FileInputStream fis = new FileInputStream(fileName);
 		prop.loadFromXML(fis);
 
