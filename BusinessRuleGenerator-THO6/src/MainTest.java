@@ -13,16 +13,6 @@ import controller.Generator;
 public class MainTest {
 	public static void main(String[] args) throws FileNotFoundException, InvalidPropertiesFormatException, IOException, SQLException {
 		Generator g = new Generator();
-		Logger logger = Logger.getLogger("defaultLogger");
-		try {
-			FileHandler fh = new FileHandler("log.txt");
-			fh.setFormatter(new SimpleFormatter());
-			logger.addHandler(fh);
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-		logger.setLevel(Level.ALL);
-		logger.info("Logger is actief");
 		g.generate("BRG_IDD_TRG_ACMP_ORA_022");
 	}
 }

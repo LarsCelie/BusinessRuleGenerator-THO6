@@ -24,4 +24,7 @@
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
+  <listener>
+  	<listener-class>servlet.ServletListener</listener-class>
+  </listener>
 </web-app>
