@@ -21,14 +21,14 @@ public class ServletListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		Logger logger = Logger.getLogger("defaultLogger");
 		try {
-			FileHandler fh = new FileHandler("log.txt");
+			FileHandler fh = new FileHandler("main-log.txt");
 			fh.setFormatter(new SimpleFormatter());
 			logger.addHandler(fh);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 		logger.setLevel(Level.ALL);
-		logger.info("Logger is actief");
+		logger.info("Logger is active and can be found here: "+arg0.getServletContext().getRealPath("/main-log.txt"));
 	}
 
 }

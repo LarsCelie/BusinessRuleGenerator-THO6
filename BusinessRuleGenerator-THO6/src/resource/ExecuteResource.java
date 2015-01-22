@@ -15,7 +15,7 @@ public class ExecuteResource {
 
 	ExecuteService executeService = new ExecuteService();
 	
-	@GET
+	@PUT
 	@Path("{databasetype}/{database}")
 	public void executeSQLStatement(@PathParam("databasetype") String type,
 			@PathParam("database") String database, 

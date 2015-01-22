@@ -61,24 +61,24 @@ public class Businessrule {
 			
 			rs = getInfo("value");
 			while(rs.next()){
-				Value v = new Value();
-				v.setOrder(rs.getInt("valorder"));
-				v.setValue(rs.getString("value"));
-				v.setDatatype(rs.getString("datatype"));
+				Value value = new Value();
+				value.setOrder(rs.getInt("valorder"));
+				value.setValue(rs.getString("value"));
+				value.setDatatype(rs.getString("datatype"));
 				
-				values.add(v);
+				values.add(value);
 			}
 			rs.close();
 			
 			rs = getInfo("attribute");
 			while(rs.next()){
-				Attribute a = new Attribute();
-				a.setOrder(rs.getInt("attorder"));
-				a.setSchema(rs.getString("schema"));
-				a.setTabel(rs.getString("tabel"));
-				a.setKolom(rs.getString("kolom"));
+				Attribute attribute = new Attribute();
+				attribute.setOrder(rs.getInt("attorder"));
+				attribute.setSchema(rs.getString("schema"));
+				attribute.setTabel(rs.getString("tabel"));
+				attribute.setKolom(rs.getString("kolom"));
 				
-				attributes.add(a);
+				attributes.add(attribute);
 			}
 			rs.close();
 		}
