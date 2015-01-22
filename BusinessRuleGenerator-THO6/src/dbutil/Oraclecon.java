@@ -13,7 +13,7 @@ public class Oraclecon extends DBcon {
 	
 	public Oraclecon(String databasename) throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
 		super();
-		super.setProperties(databasename,"Xml/Db/oracle-properties.xml");
+		super.setProperties(databasename,"/Xml/Db/oracle-properties.xml");
 	}
 	public final Connection getConnection() {
 		Logger logger = Logger.getLogger("defaultLogger");

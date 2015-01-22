@@ -10,5 +10,5 @@
   <entry key="tool_password">tho6</entry>
   <entry key="tool_server_name">92.109.55.51</entry>
   <entry key="tool_port_number">1521</entry>
-	<entry key="sid">xe</entry>
+	<entry key="tool_sid">xe</entry>
 </properties>
