@@ -11,11 +11,11 @@ import java.util.logging.Logger;
 
 public class Oraclecon extends DBcon {
 	
-	public Oraclecon() throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
+	public Oraclecon(String databasename) throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
 		super();
-		super.setProperties("Xml/Db/oracle-properties.xml");
+		super.setProperties(databasename,"Xml/Db/oracle-properties.xml");
 	}
-	public final Connection getConnection() throws SQLException{
+	public final Connection getConnection() {
 		Logger logger = Logger.getLogger("defaultLogger");
 		
 		Properties connectionProps = new Properties();
@@ -27,12 +27,15 @@ public class Oraclecon extends DBcon {
 			System.out.println(currentUrlString);
 			//				  jdbc:oracle:thin:@" + host + ":" + port + ":" + sid, user, password);
 			// String test = "jdbc:oracle:thin:@145.89.21.30:8521:cursus01";
-			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			conn = DriverManager.getConnection(currentUrlString,
-					connectionProps);
-	
-			this.urlString = currentUrlString + this.dbName;
-			conn.setCatalog(this.dbName);
+			try {
+				DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());			
+				conn = DriverManager.getConnection(currentUrlString,connectionProps);
+				this.urlString = currentUrlString + this.dbName;
+				conn.setCatalog(this.dbName);
+			} catch (SQLException e) {
+				logger.severe("Cannot connect to the database.");				
+			}
+
 		
 		logger.info("Connected to oracle database");
 		return conn;

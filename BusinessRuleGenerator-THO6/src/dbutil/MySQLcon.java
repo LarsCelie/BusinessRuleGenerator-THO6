@@ -11,9 +11,9 @@ import java.util.logging.Logger;
 
 public class MySQLcon extends DBcon {
 	
-	public MySQLcon() throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
+	public MySQLcon(String databasename) throws FileNotFoundException, InvalidPropertiesFormatException, IOException{
 		super();
-		super.setProperties("Xml/Db/mysql-properties.xml");
+		super.setProperties(databasename,"Xml/Db/mysql-properties.xml");
 	}
 	public final Connection getConnection() throws SQLException{
 		Logger logger = Logger.getLogger("defaultLogger");

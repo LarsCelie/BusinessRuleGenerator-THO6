@@ -35,7 +35,7 @@ public class DAOAttribute implements DAO{
 		Logger logger = Logger.getLogger("defaultLogger");
 		logger.info("fetching attributes in DAOAttribute");
 		String name = (String)o;
-		DBcon db = new Oraclecon();
+		DBcon db = new Oraclecon("tool");
 		con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Attribute WHERE businessrulenaam='"+name+"'");

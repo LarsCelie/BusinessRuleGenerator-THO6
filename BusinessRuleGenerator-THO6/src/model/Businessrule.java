@@ -178,4 +178,7 @@ public class Businessrule {
 		}
 		return returnAttribute;
 	}
+	public void executeStatement(String database, String sqlStatement, String type) throws SQLException {
+		new DAOBusinessrule().executeStatement(database,sqlStatement,type);
+	}
 }

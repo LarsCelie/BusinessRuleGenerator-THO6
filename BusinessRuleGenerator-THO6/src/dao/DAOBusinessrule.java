@@ -27,7 +27,7 @@ public class DAOBusinessrule implements DAO{
 		Logger logger = Logger.getLogger("defaultLogger");
 		logger.info("fetching businessrules in DAOBusinessrule");
 		String name = (String)o;
-		DBcon db = new Oraclecon();
+		DBcon db = new Oraclecon("tool");
 		con = db.getConnection();
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Businessrule WHERE BUSINESSRULENAAM='" + name + "'");
@@ -40,5 +40,24 @@ public class DAOBusinessrule implements DAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void executeStatement(String database, String sqlStatement, String type) throws SQLException {
+		DBcon db = null;
+		try {
+			if(type.equals("ORA")) {
+				db = new Oraclecon(database);
+			} else if(type.equals("MYS")) {
+				//TODO: do something with MySQL
+			} else {
+				Logger.getLogger("defaultLogger").severe("error "+type);
+			}
+		} catch (IOException e) {
+			Logger.getLogger("defaultLogger").severe("");
+		}
+		con = db.getConnection();
+		Statement st = con.createStatement();
+		st.executeQuery(sqlStatement);
+		con.close();
 	}
 }

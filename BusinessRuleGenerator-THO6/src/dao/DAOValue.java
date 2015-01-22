@@ -29,7 +29,7 @@ public class DAOValue implements DAO{
 		Logger logger = Logger.getLogger("defaultLogger");
 		logger.info("fetching values in DAOValue");
 		String name = (String)o;
-		DBcon db = new Oraclecon();
+		DBcon db = new Oraclecon("tool");
 		con = db.getConnection();
 		Statement st = con.createStatement();
 		System.out.println(name);
