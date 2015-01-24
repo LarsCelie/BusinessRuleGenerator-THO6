@@ -6,11 +6,11 @@
     <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>resource</param-value>
+      <param-value>rest.resource</param-value>
     </init-param>
     <init-param>
 	    <param-name>org.glassfish.jersey.container.ContainerResponseFilters</param-name>
-		<param-value>resource.CorsResponseFilter</param-value>
+		<param-value>controller.CorsResponseFilter</param-value>
 	</init-param>
 <!--
 	<init-param>
