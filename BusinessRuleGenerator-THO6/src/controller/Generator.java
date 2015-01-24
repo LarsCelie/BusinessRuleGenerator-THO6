@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
@@ -55,12 +53,14 @@ public class Generator {
 		
 		String databaseType = nameParts[4];
 		String ruleType = nameParts[3];
-		this.templateProperties = new Properties();
+		
 		String templateLocationString = "/Xml/RuleTemplates/" + databaseType + "/" + ruleType + ".xml";
 		String placeholderLocationString = "/Xml/RuleTemplates/" + databaseType + "/" + ruleType + "Placeholder.xml";
 		InputStream templateLocation = getXmlFileLocation(templateLocationString);
 		InputStream placeholderLocation = getXmlFileLocation(placeholderLocationString);
+		
 		if(templateLocation != null && placeholderLocation != null){
+			this.templateProperties = new Properties();
 			templateProperties.loadFromXML(templateLocation);
 			
 			this.placeHolderProperties = new Properties();
@@ -80,21 +80,6 @@ public class Generator {
 			logger.config(sqlStatement);
 		} 
 		return sqlStatement;
-	}
-
-	/**
-	 * confirm the existence of the xml file at the specified location. If the file is not found an Exception will be thrown. 
-	 * @param fileLocation
-	 * @return
-	 * @throws XmlNotFoundException
-	 */
-	public boolean checkAvailableXML(String fileLocation) throws XmlNotFoundException {
-		InputStream xmlFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileLocation);
-		if(xmlFile != null) {
-			return true;
-		}
-		XmlNotFoundException fileNotFound = new XmlNotFoundException(fileLocation);
-		throw fileNotFound;
 	}
 	/**
 	 * replacePlaceholderWithValues is a method that replaces
