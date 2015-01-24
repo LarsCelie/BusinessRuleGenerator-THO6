@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -10,8 +11,6 @@ import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.Properties;
-
-
 import java.util.logging.Logger;
 
 import model.Businessrule;
@@ -57,15 +56,15 @@ public class Generator {
 		String databaseType = nameParts[4];
 		String ruleType = nameParts[3];
 		this.templateProperties = new Properties();
-		String templateLocation = "Xml/RuleTemplates/" + databaseType + "/" + ruleType + ".xml";
-		String placeholderLocation = "Xml/RuleTemplates/" + databaseType + "/" + ruleType + "Placeholder.xml";
-		if(checkAvailableXML(templateLocation) && checkAvailableXML(placeholderLocation)){
-			FileInputStream fisTemplate = new FileInputStream(templateLocation);
-			templateProperties.loadFromXML(fisTemplate);
+		String templateLocationString = "/Xml/RuleTemplates/" + databaseType + "/" + ruleType + ".xml";
+		String placeholderLocationString = "/Xml/RuleTemplates/" + databaseType + "/" + ruleType + "Placeholder.xml";
+		InputStream templateLocation = getXmlFileLocation(templateLocationString);
+		InputStream placeholderLocation = getXmlFileLocation(placeholderLocationString);
+		if(templateLocation != null && placeholderLocation != null){
+			templateProperties.loadFromXML(templateLocation);
 			
 			this.placeHolderProperties = new Properties();
-			FileInputStream fisPlaceholder = new FileInputStream(placeholderLocation);
-			placeHolderProperties.loadFromXML(fisPlaceholder);
+			placeHolderProperties.loadFromXML(placeholderLocation);
 			
 			Enumeration<Object> keys= placeHolderProperties.keys();
 			placeHolderHashmap = new HashMap <String, String>();
@@ -79,7 +78,7 @@ public class Generator {
 			this.ruleTemplate = this.templateProperties.getProperty("template");
 			sqlStatement = replacePlaceholderWithValues(ruleTemplate);
 			logger.config(sqlStatement);
-		}
+		} 
 		return sqlStatement;
 	}
 
@@ -90,8 +89,8 @@ public class Generator {
 	 * @throws XmlNotFoundException
 	 */
 	public boolean checkAvailableXML(String fileLocation) throws XmlNotFoundException {
-		File f = new File(fileLocation);
-		if(f.isFile()) {
+		InputStream xmlFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileLocation);
+		if(xmlFile != null) {
 			return true;
 		}
 		XmlNotFoundException fileNotFound = new XmlNotFoundException(fileLocation);
@@ -175,5 +174,13 @@ public class Generator {
 			}
 		}
 		return result;
+	}
+	
+	public InputStream getXmlFileLocation(String path) throws XmlNotFoundException{
+		InputStream fileLocation = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
+		if (fileLocation == null) {
+			throw new XmlNotFoundException(path);
+		}
+		return fileLocation;
 	}
 }

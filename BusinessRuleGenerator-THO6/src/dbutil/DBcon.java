@@ -1,6 +1,5 @@
 package dbutil;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,8 +24,7 @@ public abstract class DBcon{
 	protected Properties prop;
 	protected Connection conn = null;
 	
-	protected void setProperties(String databasename,String fileName) throws FileNotFoundException,
-			IOException, InvalidPropertiesFormatException {
+	protected void setProperties(String databasename,String fileName) throws IOException{
 		Logger logger = Logger.getLogger("defaultLogger");
 		this.prop = new Properties();
 		InputStream xmlFile = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);

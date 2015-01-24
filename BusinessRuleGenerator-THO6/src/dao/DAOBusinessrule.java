@@ -28,10 +28,7 @@ public class DAOBusinessrule implements DAO{
 		logger.info("fetching businessrules in DAOBusinessrule");
 		String name = (String)o;
 		DBcon db = new Oraclecon("tool");
-		System.out.println("Debugging: oraclecon: "+db.toString());
 		con = db.getConnection();
-		System.out.println("Debugging: con: "+con.toString());
-		System.out.println("Debugging: statement: "+con.createStatement().toString());
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM Businessrule WHERE BUSINESSRULENAAM='" + name + "'");
 		return rs;
